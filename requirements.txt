@@ -1,11 +1,49 @@
-praw==7.7.1
-pandas==2.0.3
-numpy==1.24.3
-torch==2.0.1
-transformers==4.35.2
-datasets==2.14.5
-accelerate==0.24.1
-huggingface-hub==0.17.3
-tqdm==4.66.1
-python-dotenv==1.0.0
-concurrent-futures==3.1.1
+# Core data extraction dependencies
+praw==7.7.1                    # Reddit API wrapper
+aiohttp==3.9.1                 # Async HTTP client
+asyncio-throttle==1.0.2        # Rate limiting for async requests
+
+# GPU and ML dependencies
+torch>=2.1.0                   # PyTorch for GPU acceleration
+numpy>=1.24.0                  # Numerical computing
+pandas>=2.0.0                  # Data manipulation
+scikit-learn>=1.3.0            # Machine learning utilities
+
+# Data processing and storage
+jsonlines>=4.0.0               # JSONL file handling
+h5py>=3.9.0                    # HDF5 for large datasets
+pyarrow>=13.0.0                # Apache Arrow for fast I/O
+fastparquet>=0.8.3             # Parquet file format
+
+# Progress and monitoring
+tqdm>=4.66.0                   # Progress bars
+psutil>=5.9.0                  # System monitoring
+memory-profiler>=0.61.0        # Memory usage profiling
+
+# Text processing
+nltk>=3.8.1                    # Natural language processing
+spacy>=3.7.0                   # Advanced NLP
+transformers>=4.35.0           # Hugging Face transformers
+sentence-transformers>=2.2.2   # Sentence embeddings
+
+# Data validation and quality
+textstat>=0.7.3                # Text statistics
+langdetect>=1.0.9              # Language detection
+profanity-check>=1.0.3         # Content filtering
+
+# Utilities
+python-dotenv>=1.0.0           # Environment variables
+rich>=13.6.0                   # Rich terminal output
+click>=8.1.7                   # Command line interface
+pydantic>=2.4.2                # Data validation
+loguru>=0.7.2                  # Advanced logging
+
+# Development and testing
+pytest>=7.4.3                  # Testing framework
+black>=23.9.1                  # Code formatting
+flake8>=6.1.0                  # Code linting
+mypy>=1.6.1                    # Type checking
+
+# Optional GPU acceleration
+# cupy-cuda11x>=12.2.0          # GPU-accelerated NumPy (uncomment if needed)
+# rapids-cudf>=23.10.0          # GPU DataFrames (uncomment if needed)

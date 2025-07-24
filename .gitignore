@@ -1,1 +1,81 @@
+# Environment variables
 .env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/*.out
+logs/*.err
+*.log
+
+# Data files (large files)
+data/raw/
+data/processed/
+*.jsonl
+*.json
+reddit_data*.json
+dataset_stats.json
+train_dataset.jsonl
+val_dataset.jsonl
+test_extraction.json
+
+# Model files
+*.bin
+*.safetensors
+*.pt
+*.pth
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# SLURM job files
+slurm-*.out
+*.slurm.out
+*.slurm.err
