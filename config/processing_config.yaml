@@ -1,0 +1,285 @@
+# AuraChat Data Processing Configuration
+# Comprehensive settings for processing Reddit empathy data
+
+# Directory Settings
+input_dir: "data/raw/"
+output_dir: "data/processed/"
+temp_dir: "data/temp/"
+checkpoint_dir: "data/checkpoints/"
+
+# Processing Performance
+parallel_workers: 8  # Adjust based on available CPU cores
+batch_size: 1000
+memory_limit_gb: 16
+gpu_acceleration: true
+
+# Data Quality Thresholds
+quality_thresholds:
+  # Minimum requirements for conversations
+  min_empathy_pairs: 2
+  min_post_score: 10
+  max_post_length: 2000
+  min_comment_length: 20
+  
+  # Empathy scoring thresholds
+  min_empathy_score: 0.4
+  min_quality_score: 0.6
+  
+  # Language and content filters
+  language: "en"
+  toxicity_threshold: 0.3
+  spam_threshold: 0.2
+
+# Dataset Splitting
+dataset_splits:
+  train: 0.70
+  validation: 0.15
+  test: 0.15
+
+# Stratification settings
+stratification:
+  by_subreddit: true
+  by_empathy_score: true
+  by_conversation_length: true
+
+# Empathy Scoring Configuration
+empathy_scoring:
+  # Rule-based scoring weights
+  rule_weights:
+    emotional_validation: 0.25
+    active_listening: 0.20
+    supportive_language: 0.20
+    solution_oriented: 0.15
+    emotional_intelligence: 0.20
+  
+  # ML model scoring
+  use_ml_models: true
+  ml_models:
+    - name: "empathy_classifier"
+      weight: 0.6
+      model_path: "models/empathy_classifier.pt"
+    - name: "sentiment_analyzer"
+      weight: 0.4
+      model_path: "models/sentiment_analyzer.pt"
+  
+  # Empathy keywords and phrases
+  empathy_keywords:
+    emotional_validation:
+      - "understand"
+      - "feel"
+      - "difficult"
+      - "hard"
+      - "struggle"
+      - "overwhelming"
+    
+    active_listening:
+      - "sounds like"
+      - "what I hear"
+      - "seems"
+      - "appears"
+      - "from what you"
+    
+    supportive_language:
+      - "support"
+      - "here for you"
+      - "not alone"
+      - "strong"
+      - "brave"
+      - "proud"
+    
+    solution_oriented:
+      - "try"
+      - "consider"
+      - "might help"
+      - "suggestion"
+      - "option"
+      - "approach"
+
+# Text Processing
+text_processing:
+  # Cleaning operations
+  remove_urls: true
+  remove_usernames: true
+  remove_subreddit_mentions: true
+  normalize_whitespace: true
+  remove_markdown: true
+  
+  # Privacy protection
+  remove_pii: true
+  anonymize_names: true
+  remove_locations: true
+  
+  # Language processing
+  tokenization: "spacy"
+  lemmatization: true
+  stop_word_removal: false  # Keep for empathy context
+  
+  # Content filtering
+  profanity_filter: true
+  toxicity_detection: true
+  spam_detection: true
+
+# Output Formats
+output_formats:
+  # Hugging Face Datasets format
+  huggingface:
+    enabled: true
+    conversational: true
+    instruction_tuning: true
+    
+  # OpenAI fine-tuning format
+  openai:
+    enabled: true
+    chat_format: true
+    completion_format: true
+    
+  # Custom formats
+  conversational:
+    enabled: true
+    multi_turn: true
+    context_length: 5
+    
+  instruction:
+    enabled: true
+    templates:
+      - "Respond with empathy to the following message:"
+      - "Provide an empathetic response to:"
+      - "Show understanding and support for:"
+
+# Model Preparation
+model_preparation:
+  # Tokenization settings
+  max_sequence_length: 512
+  truncation_strategy: "longest_first"
+  padding: true
+  
+  # Special tokens
+  special_tokens:
+    empathy_start: "<empathy>"
+    empathy_end: "</empathy>"
+    user_start: "<user>"
+    user_end: "</user>"
+    assistant_start: "<assistant>"
+    assistant_end: "</assistant>"
+  
+  # Data augmentation
+  augmentation:
+    enabled: true
+    techniques:
+      - "paraphrase"
+      - "synonym_replacement"
+      - "emotional_intensity_variation"
+    augmentation_factor: 1.5  # 50% more data through augmentation
+
+# Quality Assurance
+quality_assurance:
+  # Validation checks
+  schema_validation: true
+  duplicate_detection: true
+  content_validation: true
+  empathy_score_validation: true
+  
+  # Sampling for manual review
+  manual_review_sample: 100
+  random_seed: 42
+  
+  # Quality metrics tracking
+  track_metrics:
+    - "empathy_score_distribution"
+    - "conversation_length_distribution"
+    - "subreddit_distribution"
+    - "quality_score_distribution"
+    - "processing_time_per_conversation"
+
+# Logging and Monitoring
+logging:
+  level: "INFO"
+  log_dir: "logs/processing/"
+  log_rotation: true
+  max_log_size_mb: 100
+  backup_count: 5
+  
+  # Progress reporting
+  progress_interval: 1000  # Log progress every N conversations
+  detailed_stats: true
+  memory_monitoring: true
+
+# Checkpoint and Recovery
+checkpointing:
+  enabled: true
+  checkpoint_interval: 5000  # Checkpoint every N conversations
+  auto_resume: true
+  backup_checkpoints: true
+
+# Resource Management
+resource_management:
+  # Memory management
+  garbage_collection_interval: 1000
+  memory_monitoring: true
+  memory_cleanup_threshold: 0.8
+  
+  # CPU usage
+  cpu_monitoring: true
+  cpu_throttling_threshold: 0.9
+  
+  # Disk usage
+  disk_monitoring: true
+  temp_cleanup: true
+  compression_level: 6  # Balance between speed and compression
+
+# Evaluation Settings
+evaluation:
+  # Automatic evaluation
+  auto_evaluate: true
+  evaluation_metrics:
+    - "empathy_score_distribution"
+    - "conversation_quality"
+    - "diversity_metrics"
+    - "toxicity_analysis"
+  
+  # Human evaluation subset
+  human_evaluation:
+    enabled: true
+    sample_size: 200
+    stratified_sampling: true
+    annotation_guidelines: "docs/annotation_guidelines.md"
+
+# Export Settings
+export:
+  # Compression
+  compress_outputs: true
+  compression_format: "gzip"
+  
+  # Metadata inclusion
+  include_metadata: true
+  include_processing_stats: true
+  include_quality_scores: true
+  
+  # Version tracking
+  version_outputs: true
+  semantic_versioning: true
+
+# Advanced Features
+advanced:
+  # Experimental features
+  experimental_features:
+    enabled: false
+    features:
+      - "advanced_empathy_modeling"
+      - "multi_modal_empathy"
+      - "personalized_empathy_scoring"
+  
+  # Integration with external services
+  external_integrations:
+    huggingface_hub: false
+    wandb_logging: false
+    mlflow_tracking: false
+
+# Debugging and Development
+debug:
+  enabled: false
+  debug_level: "DEBUG"
+  sample_processing: false
+  sample_size: 100
+  dry_run: false
+  profile_performance: false
